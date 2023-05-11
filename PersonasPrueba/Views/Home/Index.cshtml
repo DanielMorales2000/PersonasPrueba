@@ -1,0 +1,58 @@
+﻿@using PersonasPrueba.Models
+@model IEnumerable<PersonasPrueba.Models.People>
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<h1>Personas</h1>
+<form asp-action="Filter">
+    <div class="row">
+        <div class="mb-3">
+            <label asp-for="filter" class="form-label">Nombre o Apellido</label>
+            <input type="text" name="filter" id="filter" class="form-control" />
+        </div>
+        <div class="mb-3">
+            <label asp-for="quantity" class="form-label">Cantidad de personas a mostrar</label>
+            <input type="number" name="quantity" id="quantity" class="form-control" />
+        </div>
+        <button type="submit" class="btn btn-primary">Enviar</button>
+    </div>
+    
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Acciones</th>
+            <th>Tipo Persona</th>
+            <th>Identificación</th>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Correo</th>
+            <th>Empresa</th>
+            <th>Estado</th>
+        </tr>
+    </thead>
+    <tbody>
+        @*@if (Model != null) {*@
+        @foreach (var person in Model)
+        {
+            <tr>
+                <td>@person.idPersona</td>
+                <td>
+                    <a class="btn btn-primary" asp-action="Update" asp-route-id="@person.idPersona">Editar</a>
+                    <a class="btn btn-danger" asp-action="Delete" asp-route-id="@person.idPersona">Borrar</a>
+                </td>
+                <td>@person.tipoPersona</td>
+                <td>@person.numeroDocumento</td>
+                <td>@person.nombre</td>
+                <td>@person.apellido</td>
+                <td>@person.correo</td>
+                <td>@person.empresa</td>
+                <td>@person.estado</td>
+            </tr>
+
+        }
+    </tbody>
+</table>
