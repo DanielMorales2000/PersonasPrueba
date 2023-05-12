@@ -14,7 +14,6 @@ namespace PersonasPrueba.Controllers
 	public class HomeController : Controller
 	{
 		static string baseUrl = "http://appsdemo.logytechmobile.com/ServicioIntegracionControAcceso/api";
-		string token = "";
 		int peopleCount = 0;
 		string filter = "";
 
@@ -40,20 +39,6 @@ namespace PersonasPrueba.Controllers
 			filter = nameFilter;
 
 			Index();
-		}
-
-		public ActionResult About()
-		{
-			ViewBag.Message = "Your application description page.";
-
-			return View();
-		}
-
-		public ActionResult Contact()
-		{
-			ViewBag.Message = "Your contact page.";
-
-			return View();
 		}
 			
 
@@ -93,7 +78,7 @@ namespace PersonasPrueba.Controllers
 
 		public async Task<string> Login()
 		{
-			LoginData data = new LoginData();
+			LoginDataModel data = new LoginDataModel();
 
 			var request = (HttpWebRequest)WebRequest.Create(baseUrl+"/Cuentas/Login");
 			request.Method = "POST";
@@ -120,7 +105,7 @@ namespace PersonasPrueba.Controllers
 						using (StreamReader objReader = new StreamReader(strReader))
 						{
 							string responseBody = objReader.ReadToEnd();
-							data = JsonConvert.DeserializeObject<LoginData>(responseBody);
+							data = JsonConvert.DeserializeObject<LoginDataModel>(responseBody);
 						}
 					}
 				}
@@ -135,8 +120,3 @@ namespace PersonasPrueba.Controllers
 	}
 }
 
-public class LoginData
-{
-	public string token { get; set; }
-	public string nombreApellido { get; set; }
-}
